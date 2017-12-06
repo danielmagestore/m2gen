@@ -23,34 +23,36 @@ if($ModuleName && $Namespace){
     //unzip default source code
     $commands[] = "unzip module_default.zip -d source/;";
 
+    //Change directory to source
+    $commands[] = "cd source;";
+
     //change module name in files
-    $commands[] = 'find * -name \*.* -exec sed -i "s/Test/'.$ModuleName.'/g" {} \;';
+    $commands[] = 'find * -name \*.* -exec sed -i "s/Defaultmodule/'.$ModuleName.'/g" {} \;';
 
     //change module name lower case in files
-    $commands[] = 'find * -name \*.* -exec sed -i "s/test/'.$moduleName.'/g" {} \;';
+    $commands[] = 'find * -name \*.* -exec sed -i "s/defaultmodule/'.$moduleName.'/g" {} \;';
 
     //change namespace in files
-    $commands[] = 'find * -name \*.* -exec sed -i "s/Magentovn/'.$Namespace.'/g" {} \;';
+    $commands[] = 'find * -name \*.* -exec sed -i "s/Magestore/'.$Namespace.'/g" {} \;';
 
     //change namespace lower case in files
-    $commands[] = 'find * -name \*.* -exec sed -i "s/magentovn/'.$namespace.'/g" {} \;';
+    $commands[] = 'find * -name \*.* -exec sed -i "s/magestore/'.$namespace.'/g" {} \;';
 
     //change folder name
-    $commands[] = 'find . -depth -type d -name "Magentovn*" -exec mv {} source/app/code/'.$Namespace.' \;';
+    $commands[] = 'find . -depth -type d -name "Magestore*" -exec mv {} app/code/'.$Namespace.' \;';
 
     //change folder name
-    $commands[] = 'find . -depth -type d -name "Test*" -exec mv {} source/app/code/'.$Namespace.'/'.$ModuleName.' \;';
+    $commands[] = 'find . -depth -type d -name "Defaultmodule*" -exec mv {} app/code/'.$Namespace.'/'.$ModuleName.' \;';
 
     //zip created module
-    $commands[] = "cd source; zip -r ../result/$fileName *;";
+    $commands[] = "zip -r ../result/$fileName *;";
 
     //remove temp source files
-    $commands[] = "rm -Rf source/;";
+    $commands[] = "rm -Rf app/;";
 
     //execute commands
-    foreach ($commands as $command){
-        shell_exec($command);
-    }
+    //echo implode(' ',$commands);
+    shell_exec(implode(' ',$commands));
 
     //download zip file
     header("Location: $url");
@@ -60,9 +62,9 @@ if($ModuleName && $Namespace){
 <form action="index.php" method="post">
     <ul>
         <li><label for="namespace">Namespace</label></li>
-        <li><input id="namespace" name="namespace" type="text"/></li>
+        <li><input id="namespace" name="namespace" type="text" value="Namespace"/></li>
         <li><label for="module_name">Module Name</label></li>
-        <li><input id="module_name" name="module_name" type="text"/></li>
+        <li><input id="module_name" name="module_name" type="text" value="Modulename"/></li>
         <li><input type="submit" value="Download"/>
     </ul>
 </form>
