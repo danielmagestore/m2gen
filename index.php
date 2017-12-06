@@ -2,6 +2,10 @@
 $Namespace = $_POST['namespace'];
 $ModuleName = $_POST['module_name'];
 if($ModuleName && $Namespace){
+    //make sure the format is correctlly
+    $Namespace = ucfirst($Namespace);
+    $ModuleName = ucfirst($ModuleName);
+
     //generate namespace with lower case
     $namespace = strtolower($Namespace);
 
@@ -58,7 +62,7 @@ if($ModuleName && $Namespace){
 <form action="index.php" method="post">
     <ul>
         <li><label for="namespace">Namespace</label></li>
-        <li><input id="namespace" name="namespace" type="text" value="Namespace"/></li>
+        <li><input id="namespace" name="namespace" type="text" value="Yournamespace"/></li>
         <li><label for="module_name">Module Name</label></li>
         <li><input id="module_name" name="module_name" type="text" value="Modulename"/></li>
         <li><input type="submit" value="Download"/>
