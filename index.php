@@ -23,36 +23,32 @@ if($ModuleName && $Namespace){
     //unzip default source code
     $commands[] = "unzip module_default.zip -d source/;";
 
-    //Change directory to source
-    $commands[] = "cd source;";
-
     //change module name in files
-    $commands[] = 'find * -name \*.* -exec sed -i "s/Defaultmodule/'.$ModuleName.'/g" {} \;';
+    $commands[] = 'cd source; find * -name \*.* -exec sed -i "s/Defaultmodule/'.$ModuleName.'/g" {} +; ';
 
     //change module name lower case in files
-    $commands[] = 'find * -name \*.* -exec sed -i "s/defaultmodule/'.$moduleName.'/g" {} \;';
+    $commands[] = 'cd source; find * -name \*.* -exec sed -i "s/defaultmodule/'.$moduleName.'/g" {} +; ';
 
     //change namespace in files
-    $commands[] = 'find * -name \*.* -exec sed -i "s/Magestore/'.$Namespace.'/g" {} \;';
+    $commands[] = 'cd source; find * -name \*.* -exec sed -i "s/Magestore/'.$Namespace.'/g" {} +; ';
 
     //change namespace lower case in files
-    $commands[] = 'find * -name \*.* -exec sed -i "s/magestore/'.$namespace.'/g" {} \;';
+    $commands[] = 'cd source; find * -name \*.* -exec sed -i "s/magestore/'.$namespace.'/g" {} +; ';
 
     //change folder name
-    $commands[] = 'find . -depth -type d -name "Magestore*" -exec mv {} app/code/'.$Namespace.' \;';
+    $commands[] = 'cd source; mv app/code/Magestore/ app/code/'.$Namespace.' ; ';
 
     //change folder name
-    $commands[] = 'find . -depth -type d -name "Defaultmodule*" -exec mv {} app/code/'.$Namespace.'/'.$ModuleName.' \;';
+    $commands[] = 'cd source; mv app/code/'.$Namespace.'/Defaultmodule app/code/'.$Namespace.'/'.$ModuleName.'; ';
 
     //zip created module
-    $commands[] = "zip -r ../result/$fileName *;";
+    $commands[] = "cd source; zip -r ../result/$fileName *;";
 
     //remove temp source files
-    $commands[] = "rm -Rf app/;";
+    $commands[] = "cd source; rm -rf *;";
 
     //execute commands
-    //echo implode(' ',$commands);
-    shell_exec(implode(' ',$commands));
+    $output = shell_exec(implode(' ',$commands));
 
     //download zip file
     header("Location: $url");
