@@ -86,7 +86,7 @@ if ($ModuleName && $Namespace) {
 
 <script>
     requirejs.config({
-        baseUrl: "http://m2gen.magentovn.com//lib/js/",
+        baseUrl: "http://m2gen.magentovn.com/lib/js/",
         urlArgs: "bust=" + (new Date()).getTime(), // Disable require js cache
         waitSeconds: 0,
         paths: {
@@ -103,6 +103,7 @@ if ($ModuleName && $Namespace) {
             uiRegistry: 'ui/lib/registry/registry',
             eventManager: 'model/event-manager',
             accounting: 'lib/accounting.min',
+            'mage/url': 'lib/mage/url',
             'mage/utils/wrapper': 'lib/mage/utils/wrapper',
             'mage/apply/main': 'lib/mage/apply/main',
             mageUtils: 'lib/mage/utils/main',
@@ -130,10 +131,14 @@ if ($ModuleName && $Namespace) {
 <script>
     require([
         'uiApp',
+        'mage/url',
         'lib/jquery/posOverlay',
         'lib/jquery/posAlert',
         'lib/jquery/posPopup'
-    ], function (app) {
+    ], function (app, urlBuilder) {
+
+        urlBuilder.setBaseUrl("http://m2gen.magentovn.com/");
+
         app({
             components: {
                 "container": {
