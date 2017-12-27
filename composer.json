@@ -1,0 +1,15 @@
+{
+  "authors": [
+    {
+      "name": "Daniel Truong",
+      "email": "daniel@magentovn.com",
+      "homepage": "https://danieltruong.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Magentovn\\": "vendor/magentovn/"
+    }
+  }
+}
