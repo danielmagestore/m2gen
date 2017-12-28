@@ -1,15 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <link href="/lib/css/materialize.css" rel="stylesheet" type="text/css"/>
-    <link href="/lib/css/style.css" rel="stylesheet" type="text/css"/>
-    <script src="/lib/js/require.js" type="text/javascript"></script>
-    <script src="/lib/js/lib/jquery/jquery-3.2.1.js" type="text/javascript"></script>
-</head>
-
-<body>
+<?php include(__DIR__ . '/header.php');?>
 <?php
-require __DIR__ . '/vendor/autoload.php';
 $Namespace = $_POST['namespace'];
 $ModuleName = $_POST['module_name'];
 if ($ModuleName && $Namespace) {
@@ -85,50 +75,6 @@ if ($ModuleName && $Namespace) {
 </div>
 
 <script>
-    requirejs.config({
-        baseUrl: "http://m2gen.magentovn.com/lib/js/",
-        urlArgs: "bust=" + (new Date()).getTime(), // Disable require js cache
-        waitSeconds: 0,
-        paths: {
-            domReady: 'domReady',
-            jquery: 'lib/jquery/jquery-3.2.1.js',
-            underscore: 'lib/underscore',
-            ko: 'lib/knockoutjs/knockout',
-            'knockout-es5': 'lib/knockoutjs/knockout-es5',
-            'es6-collections': 'es6-collections',
-            uiApp: 'ui/core/app',
-            uiClass: 'ui/lib/core/class',
-            uiElement: 'ui/lib/core/element/element',
-            uiComponent: 'ui/lib/core/collection',
-            uiRegistry: 'ui/lib/registry/registry',
-            eventManager: 'model/event-manager',
-            accounting: 'lib/accounting.min',
-            'mage/url': 'lib/mage/url',
-            'mage/utils/wrapper': 'lib/mage/utils/wrapper',
-            'mage/apply/main': 'lib/mage/apply/main',
-            mageUtils: 'lib/mage/utils/main',
-            'hammerjs': 'hammer.min',
-            'velocity': 'velocity.min',
-            'materialize': 'materialize',
-        },
-        config: {
-            text: {
-                useXhr: function (url, protocol, hostname, port) {
-                    return true;
-                }
-            }
-        },
-        shim: {
-            'velocity': {
-                deps: ['jquery']
-            },
-            'materialize': {
-                deps: ['jquery', 'velocity']
-            }
-        }
-    });
-</script>
-<script>
     require([
         'uiApp',
         'mage/url',
@@ -150,6 +96,4 @@ if ($ModuleName && $Namespace) {
 
     });
 </script>
-</body>
-</html>
-
+<?php include(__DIR__ . '/footer.php');?>

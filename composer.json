@@ -1,4 +1,8 @@
 {
+  "name": "magentovn/project-m2gen",
+  "description": "A Magento 2 module creator",
+  "type": "project",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "Daniel Truong",
@@ -11,5 +15,8 @@
     "psr-4": {
       "Magentovn\\": "vendor/magentovn/"
     }
+  },
+  "require": {
+    "zendframework/zendframework": "*"
   }
 }
